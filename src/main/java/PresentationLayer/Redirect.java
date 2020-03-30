@@ -19,6 +19,9 @@ public class Redirect extends Command {
             request.setAttribute("toppings", Initializer.getToppingList());
             request.setAttribute("bottoms", Initializer.getBottomList());
         }
+        if(destination.equals("employee")) {
+            request.setAttribute("customers", Initializer.getCustomerList());
+        }
 
         return destination;
     }

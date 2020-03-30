@@ -22,7 +22,4 @@ public class LogicFacade {
         return user;
     }
 
-    public static ArrayList<User> getAllCustomers() throws LoginSampleException, SQLException, ClassNotFoundException {
-        return UserMapper.customerList();
-    }
 }

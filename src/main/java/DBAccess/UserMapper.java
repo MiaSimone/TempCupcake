@@ -101,6 +101,38 @@ public class UserMapper {
         }
     }
 
+    public static ArrayList<User> getCustomer() throws LoginSampleException {
+
+        ArrayList<User> listOfCustomers = null;
+
+        try {
+            Connector con = new Connector();
+            String SQL = "SELECT * FROM tempcupcakes.users where Role='customer'";
+            PreparedStatement ps = con.getConnector().prepareStatement( SQL );
+            ResultSet rs = ps.executeQuery();
+            while ( rs.next() ) {
+                if (listOfCustomers == null){
+                    listOfCustomers = new ArrayList<>();
+                }
+                String name = rs.getString("Name");
+                String email = rs.getString("Email");
+                String password = rs.getString("Password");
+                String role = rs.getString("Role");
+                double balance = rs.getDouble("Balance");
+                int id = rs.getInt("UserID");
+                User tmpCus = new User(name, email, password, role, balance);
+                tmpCus.setUserID(id);
+                listOfCustomers.add(tmpCus);
+
+            }
+        } catch ( ClassNotFoundException | SQLException ex ) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return listOfCustomers;
+    }
+
+
+    /*
     public static ArrayList<User> customerList() throws LoginSampleException {
 
         ArrayList<User> listOfCustomers = null;
@@ -130,6 +162,6 @@ public class UserMapper {
         }
         return listOfCustomers;
     }
-
+*/
 
 }

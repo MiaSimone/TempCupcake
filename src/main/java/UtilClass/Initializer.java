@@ -16,7 +16,6 @@ public class Initializer {
 
     private static List<Topping> toppingList;
     private static List<Bottom> bottomList;
-    private static List<User> customerList = null;
 
     public static void initToppings() {
         if (toppingList == null){
@@ -35,15 +34,13 @@ public class Initializer {
         return toppingList;
     }
 
-
-    public static List<User> getCustomerList() {
+    private static List<User> customerList;
+    public static void initCustomers() throws LoginSampleException {
         if (customerList == null){
-            try {
-                customerList = LogicFacade.getAllCustomers();
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+            customerList = UserMapper.getCustomer();
         }
+    }
+    public static List<User> getCustomerList(){
         return customerList;
     }
 }

@@ -29,7 +29,7 @@ public class Kurv extends Command {
         double newBalance = currentBalance-kurv.getTotalSum();
         if (newBalance>0){
 
-            UserMapper.buyBalance(newBalance, user.getEmail());
+            UserMapper.updateBalance(newBalance, user.getEmail());
             user.setBalance(newBalance);
             session.setAttribute("balance", newBalance);
 

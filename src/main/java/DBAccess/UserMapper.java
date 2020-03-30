@@ -61,7 +61,7 @@ public class UserMapper {
         }
     }
 
-    public static void buyBalance(double amount, String email) {
+    public static void updateBalance(double amount, String email) {
 
         String SQL = "UPDATE users SET Balance = ? WHERE Email = ?";
 
@@ -77,6 +77,24 @@ public class UserMapper {
 
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+
+    public static User findUser(String email) throws LoginSampleException {
+        try {
+            Connector con = new Connector();
+            String SQL = "SELECT Balance FROM users WHERE Email=?";
+            PreparedStatement ps = con.getConnector().prepareStatement(SQL);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            double balance = rs.getDouble("Balance");
+            User user = new User(email, balance);
+            return user;
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new LoginSampleException(ex.getMessage());
         }
     }
 

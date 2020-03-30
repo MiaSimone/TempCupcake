@@ -22,6 +22,11 @@ public class User {
         this.balance = balance;
     }
 
+    public User(String email, double balance) {
+        this.email = email;
+        this.balance = balance;
+    }
+
     public int getUserID() {
         return userID;
     }

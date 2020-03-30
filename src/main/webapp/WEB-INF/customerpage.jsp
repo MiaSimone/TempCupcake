@@ -1,4 +1,4 @@
-<%@ page import="FunctionLayer.Customer" %>
+
 <%@ page import="UtilClass.Initializer" %><%--
     Document   : customerpage
     Created on : Aug 22, 2017, 2:33:37 PM

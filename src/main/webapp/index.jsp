@@ -1,4 +1,4 @@
-<%@ page import="FunctionLayer.Customer" %>
+
 <%@ page import="FunctionLayer.User" %><%--
     Document   : index
     Created on : Aug 22, 2017, 2:01:06 PM
@@ -63,15 +63,18 @@
 
 
 
-
-        <h1>Welcome to Sem 2</h1>
-
-
     <!-- Cards -->
     <div class="container mt-5">
+        <div class="mb-3">
+            <c:if test = "${requestScope.error!= null}" >
+                <div style="background-color: red; padding: 7px;">
+                    <h2>Error ! </h2>
+                    ${requestScope.error}
+                </div>
+            </c:if>
+        </div>
 
-        <div class="row">
-
+        <div class="row mt-3">
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
                     <a href="FrontController?target=redirect&destination=login"><img class="card-img-top" src="./Images/bestil.jpg" alt=""></a>
@@ -120,19 +123,5 @@
     </div>
     <!-- /.container -->
 
-<%--        Bare lige se I har en ide om hvad vi forslå I ikke gør ! det hedder scpript lets --%>
-<%--        <% String error = (String) request.getAttribute( "error");--%>
-<%--           if ( error != null) { --%>
-<%--               out.println("<H2>Error!!</h2>");--%>
-<%--               out.println(error);--%>
-<%--           }--%>
-<%--        %>--%>
-
-        <c:if test = "${requestScope.error!= null}" >
-
-           <h2>Error ! </h2>
-            ${requestScope.error}
-
-        </c:if>
     </body>
 </html>

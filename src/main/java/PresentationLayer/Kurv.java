@@ -23,10 +23,6 @@ public class Kurv extends Command {
         request.setAttribute("kurv", kurv.getOrderlist());
 
         User user = (User) session.getAttribute("user");
-        Topping topping = (Topping) session.getAttribute("top");
-        Bottom bottom = (Bottom) session.getAttribute("bund");
-
-        OrderItem orderItem = (OrderItem) request.getAttribute("orderItem");
 
         // Trækker beløb fra saldo:
         double currentBalance = user.getBalance();

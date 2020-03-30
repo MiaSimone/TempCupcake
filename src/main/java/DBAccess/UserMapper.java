@@ -1,12 +1,14 @@
 package DBAccess;
 
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.Topping;
 import FunctionLayer.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  The purpose of UserMapper is to...
@@ -80,22 +82,54 @@ public class UserMapper {
         }
     }
 
-
-    public static User findUser(String email) throws LoginSampleException {
+    public static double findUser(String email) throws LoginSampleException {
         try {
             Connector con = new Connector();
-            String SQL = "SELECT Balance FROM users WHERE Email=?";
+            String SQL = "SELECT Balance FROM users "
+                    + "WHERE Email=?";
             PreparedStatement ps = con.getConnector().prepareStatement(SQL);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
-
-            double balance = rs.getDouble("Balance");
-            User user = new User(email, balance);
-            return user;
-
+            if (rs.next()) {
+                double balance = rs.getDouble("Balance");
+                return balance;
+            } else {
+                throw new LoginSampleException("Could not validate user");
+            }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
     }
+
+    public static ArrayList<User> customerList() throws LoginSampleException {
+
+        ArrayList<User> listOfCustomers = null;
+
+        try {
+            Connector con = new Connector();
+            String SQL = "SELECT * FROM tempcupcakes.users WHERE Role=customer";
+            PreparedStatement ps = con.getConnector().prepareStatement( SQL );
+            ResultSet rs = ps.executeQuery();
+            while ( rs.next() ) {
+                if (listOfCustomers == null){
+                    listOfCustomers = new ArrayList<>();
+                }
+                String name = rs.getString("Name");
+                String email = rs.getString("Email");
+                String password = rs.getString("Password");
+                String role = rs.getString("Role");
+                double balance = rs.getDouble("Balance");
+                int id = rs.getInt("CustomerID");
+                User tmpCus = new User(name, email, password, role, balance);
+                tmpCus.setUserID(id);
+                listOfCustomers.add(tmpCus);
+
+            }
+        } catch ( ClassNotFoundException | SQLException ex ) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return listOfCustomers;
+    }
+
 
 }

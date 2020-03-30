@@ -22,9 +22,8 @@ public class User {
         this.balance = balance;
     }
 
-    public User(String email, double balance) {
+    public User(String email) {
         this.email = email;
-        this.balance = balance;
     }
 
     public int getUserID() {
@@ -73,5 +72,17 @@ public class User {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }

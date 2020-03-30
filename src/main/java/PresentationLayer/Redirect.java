@@ -19,6 +19,7 @@ public class Redirect extends Command {
             request.setAttribute("toppings", Initializer.getToppingList());
             request.setAttribute("bottoms", Initializer.getBottomList());
         }
+
         return destination;
     }
 }

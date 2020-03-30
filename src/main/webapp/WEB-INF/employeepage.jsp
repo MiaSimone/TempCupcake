@@ -33,6 +33,12 @@
 </head>
 <body style="background: rgb(184,36,62) linear-gradient(0deg, rgba(184,36,62,1) 0%, rgba(224,202,174,1) 44%)">
 
+<%
+    if (request.getServletContext().getAttribute("customerList") == null) {
+        request.getServletContext().setAttribute("customerList", Initializer.getCustomerList());
+    }
+%>
+
 <img src="Images/LoginBackground.png" class="img-fluid mb-4" alt="Logo" width="100%" height=auto>
 
 
@@ -94,7 +100,7 @@
             <div class="collapse" id="AlleKunder">
                 <div class="card card-body">
                     <c:forEach var="customer" items="${applicationScope.customerList}">
-                        Kunde-${customer.id}: ${customer.name}, ${customer.email}. Saldo: ${customer.balance}
+                        Kunde-${customer.userID}: ${customer.name}, ${customer.email}. Saldo: ${customer.balance}
                         <br><br>
                     </c:forEach>
                 </div>

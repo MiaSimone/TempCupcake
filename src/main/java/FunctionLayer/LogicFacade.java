@@ -3,6 +3,8 @@ package FunctionLayer;
 import DBAccess.UserMapper;
 
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * The purpose of LogicFacade is to...
@@ -20,4 +22,7 @@ public class LogicFacade {
         return user;
     }
 
+    public static ArrayList<User> getAllCustomers() throws LoginSampleException, SQLException, ClassNotFoundException {
+        return UserMapper.customerList();
+    }
 }

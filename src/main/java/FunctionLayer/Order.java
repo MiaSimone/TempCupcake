@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Order {
@@ -7,12 +8,19 @@ public class Order {
     private int orderID;
     private String email;
     private int userID;
-    private LocalDate date;
+    private LocalDate setDate;
+    private Date getDate;
 
-    public Order(String email, int userID, LocalDate date) {
+    public Order(String email, int userID, LocalDate setDate) {
         this.email = email;
         this.userID = userID;
-        this.date = date;
+        this.setDate = setDate;
+    }
+
+    public Order(String email, int userID, Date getDate) {
+        this.email = email;
+        this.userID = userID;
+        this.getDate = getDate;
     }
 
     public int getOrderID() {
@@ -39,11 +47,19 @@ public class Order {
         this.userID = userID;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getSetDate() {
+        return setDate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setSetDate(LocalDate setDate) {
+        this.setDate = setDate;
+    }
+
+    public Date getGetDate() {
+        return getDate;
+    }
+
+    public void setGetDate2(Date getDate) {
+        this.getDate = getDate;
     }
 }

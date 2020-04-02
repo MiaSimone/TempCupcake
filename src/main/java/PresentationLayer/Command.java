@@ -12,11 +12,13 @@ abstract class Command {
     private static void initCommands() {
         commands = new HashMap<>();
         commands.put( "login", new Login() );
-        commands.put( "register", new Register() );
+        commands.put( "registrer", new Registrer() );
         commands.put("redirect", new Redirect());
         commands.put("bestilling", new Bestilling());
         commands.put("kurv", new Kurv());
-        commands.put("employee", new Employee());
+        commands.put("insertAmount", new InsertAmount());
+        commands.put("sletOrdre", new SletOrdre());
+        commands.put("fjernOrdre", new FjernOrdreFraKurv());
     }
 
     static Command from( HttpServletRequest request ) {
@@ -27,7 +29,7 @@ abstract class Command {
         return commands.getOrDefault(TagetName, new UnknownCommand() );   // unknowncommand er default.
     }
 
-    abstract String execute( HttpServletRequest request, HttpServletResponse response ) 
+    abstract String execute( HttpServletRequest request, HttpServletResponse response )
             throws LoginSampleException;
 
 }

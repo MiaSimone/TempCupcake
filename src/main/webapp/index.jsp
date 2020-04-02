@@ -52,7 +52,7 @@
         <div class="collapse navbar-collapse mr-4" id="navbarNavDropdown" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="FrontController?target=redirect&destination=index"><i class="fa fa-fw fa-home"></i>Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="FrontController?target=redirect&destination=index"><i class="fa fa-fw fa-home"></i>Hjem <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="FrontController?target=redirect&destination=login">Login</a>
@@ -63,17 +63,9 @@
 
     <!-- Cards -->
     <div class="container mt-5">
-        <div class="mb-3">
-            <c:if test = "${requestScope.error!= null}" >
-                <div style="background-color: red; padding: 7px;">
-                    <h2>Error ! </h2>
-                    ${requestScope.error}
-                </div>
-            </c:if>
-        </div>
 
         <div class="row mt-3">
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-lg-6 col-md-6 mb-4">
                 <div class="card h-100">
                     <a href="FrontController?target=redirect&destination=login"><img class="card-img-top" src="./Images/bestil.jpg" alt=""></a>
                     <div class="card-body">
@@ -86,25 +78,12 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-lg-6 col-md-6 mb-4">
                 <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="./Images/ingrediens.jpg" alt=""></a>
+                    <a href="FrontController?target=redirect&destination=infosite"><img class="card-img-top" src="./Images/Bornholm.jpg" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#" style="text-decoration: none">Vores Ingredienser</a>
-                        </h4>
-                        <p class="card-text">Hvis De er interesseret i at vide mere om vores økologiske ingredienser,
-                            kan de klikke her.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="./Images/Bornholm.jpg" alt=""></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#" style="text-decoration: none">Olsker Cupcakes</a>
+                            <a href="FrontController?target=redirect&destination=infosite" style="text-decoration: none">Olsker Cupcakes</a>
                         </h4>
                         <p class="card-text">Her vil De finde vores kontakt information.</p>
                     </div>
@@ -120,6 +99,13 @@
 
     </div>
     <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark mt-5">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Olskers Cupcakes</p>
+        </div>
+    </footer>
 
     </body>
 </html>

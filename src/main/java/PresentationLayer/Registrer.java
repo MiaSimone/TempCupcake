@@ -2,12 +2,13 @@ package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.Orderlist;
 import FunctionLayer.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Register extends Command {
+public class Registrer extends Command {
 
     @Override
     String execute( HttpServletRequest request, HttpServletResponse response ) throws LoginSampleException {
@@ -21,6 +22,12 @@ public class Register extends Command {
             User user = LogicFacade.createUser(navn, email, password1);
 
             HttpSession session = request.getSession();
+            Orderlist kurv = (Orderlist) session.getAttribute("kurv");
+            if (kurv == null) {
+                kurv = new Orderlist();
+            }
+
+            session.setAttribute("kurv", kurv);
 
             session.setAttribute("navn",navn);
             session.setAttribute("email",email);
@@ -32,7 +39,7 @@ public class Register extends Command {
             session.setAttribute("balance", user.getBalance());
             return user.getRole() + "page";
         } else {
-            throw new LoginSampleException( "the two passwords did not match" );
+            throw new LoginSampleException( "De to passwords var ikke ens." );
         }
     }
 

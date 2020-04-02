@@ -57,13 +57,20 @@
     <div class="collapse navbar-collapse mr-4" id="navbarNavDropdown" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="FrontController?target=redirect&destination=customerpage"><i class="fa fa-fw fa-home"></i>Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="FrontController?target=redirect&destination=customerpage"><i class="fa fa-fw fa-home"></i>Hjem <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <ul class="navbar-nav">
             <li>
-                <span style="margin-right:10px;">${sessionScope.email}</span>
+                <span>${sessionScope.email}</span>
             </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li>
+                <a class="nav-link" href="FrontController?target=redirect&destination=index">(log ud)</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
             <li>
                 <span style="margin-right:20px;">(saldo: ${sessionScope.balance} DKK)</span>
             </li>
@@ -77,50 +84,87 @@
 </nav>
 
 
+<%  String besked = (String) request.getAttribute("message");
+    String status = (String) request.getAttribute("status");
+    if (besked != null && status != null) {
+        String alert = "";
+        if (status.equals("ok")) {
+            alert = "<div class=\"alert alert-success\">_message_</div>";
+        } else {
+            alert = "<div class=\"alert alert-danger\">_message_</div>";
+        }
+        alert = alert.replace("_message_", besked);
+        out.println(alert);
+    }
+%>
+
 <!-- Page Content -->
 <div class="container mt-4">
+
+    <h4>Cart
+        <span class="price" style="color:black">
+                        <i class="fa fa-shopping-cart"></i>
+                    </span>
+    </h4>
+
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th>Bund</th>
+                <th>Topping</th>
+                <th>Antal</th>
+                <th>Pris</th>
+                <th>I alt</th>
+                <th>Fjern</th>
+            </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="orderItem" items="${sessionScope.kurv.orderlist}">
+                    <tr>
+                        <td>${orderItem.bottom.name}</td>
+                        <td>${orderItem.topping.name}</td>
+                        <td>${orderItem.antal}</td>
+                        <td>${orderItem.cupcakePrice}</td>
+                        <td>${orderItem.orderPrice}</td>
+                        <td>
+                            <form action="FrontController" method="post">
+                                <input type="hidden" name="target" value="fjernOrdre">
+                                <button type="submit" value="${requestScope.orderItem}"
+                                        class="btn btn-danger btn-xs">
+                                    Fjern
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+
+            <tr>
+                <td colspan="4">I alt</td>
+                <td>${sessionScope.kurv.totalSum}</td>
+                <td>&nbsp;</td>
+            </tr>
+            </tbody>
+        </table>
+
     <form action="FrontController" method="post">
         <input type="hidden" name="target" value="kurv">
 
-        <div class="col-25" align="center">
-            <div class="container">
-                <h4>Cart
-                    <span class="price" style="color:black">
-                        <i class="fa fa-shopping-cart"></i>
-                    </span>
-                </h4>
-                <div class="card card-body">
-                    <c:forEach var="orderItem" items="${sessionScope.kurv.orderlist}">
-                        ${orderItem.bottom.name} bund (${orderItem.bottom.bottomPrice} kr.) med ${orderItem.topping.name} topping
-                        (${orderItem.topping.toppingPrice} kr.). Antal: ${orderItem.quantity}. Pris: ${orderItem.orderlinePrice}
-                        <br>
-                    </c:forEach>
-                </div>
-                <hr color="black">
-                <p>Total: <span class="price" style="color:black"><b>${sessionScope.kurv.totalSum}</b></span></p>
+        <div class="row">
+            <div class="col-md-4 text-center mt-3 mb-3">
+                <a href="FrontController?target=redirect&destination=bestilling"
+                   class="btn btn-secondary mt-4 mb-3" role="button" aria-pressed="true">Bestil flere</a>
             </div>
 
-            <div class="row">
-                <div class="col-md-4 text-center mt-3 mb-3">
-                    <a href="FrontController?target=redirect&destination=bestilling"
-                       class="btn btn-secondary mt-4 mb-3" role="button" aria-pressed="true">Bestil flere</a>
-                </div>
-
-                <div class="col-md-4 text-center mt-3 mb-3">
-                    <button type="submit" class="btn btn-dark mt-4 mb-3">Betal</button>
-                </div>
-
-                <div class="col-md-4 text-center mt-3 mb-3">
-                    <a href="FrontController?target=redirect&destination=customerpage"
-                       class="btn btn-secondary mt-4 mb-3" role="button" aria-pressed="true">Gå til hovedmenu</a>
-                </div>
+            <div class="col-md-4 text-center mt-3 mb-3">
+                <button type="submit" class="btn btn-dark mt-4 mb-3">Betal</button>
             </div>
 
-
+            <div class="col-md-4 text-center mt-3 mb-3">
+                <a href="FrontController?target=redirect&destination=customerpage"
+                   class="btn btn-secondary mt-4 mb-3" role="button" aria-pressed="true">Gå til hovedmenu</a>
+            </div>
         </div>
-
     </form>
-
 
 </div>
 <!-- Container -->
@@ -128,9 +172,8 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark mt-5">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Gruppe4</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Olskers Cupcakes</p>
     </div>
-    <!-- /.container -->
 </footer>
 
 

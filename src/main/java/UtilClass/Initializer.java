@@ -34,6 +34,7 @@ public class Initializer {
         return toppingList;
     }
 
+    /*
     private static List<User> customerList;
     public static void initCustomers() throws LoginSampleException {
         if (customerList == null){
@@ -43,4 +44,5 @@ public class Initializer {
     public static List<User> getCustomerList(){
         return customerList;
     }
+     */
 }

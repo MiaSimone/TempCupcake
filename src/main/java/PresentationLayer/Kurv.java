@@ -19,16 +19,24 @@ public class Kurv extends Command {
         HttpSession session = request.getSession();
 
         Orderlist kurv = (Orderlist) session.getAttribute("kurv");
-        session.setAttribute("finalPrice", kurv.getTotalSum());
         request.setAttribute("kurv", kurv.getOrderlist());
+
 
         User user = (User) session.getAttribute("user");
 
         // Trækker beløb fra saldo:
         double currentBalance = user.getBalance();
         double newBalance = currentBalance-kurv.getTotalSum();
-        if (newBalance>0){
 
+/*
+        if (kurv.getTotalSum() > user.getBalance()){
+            request.setAttribute("status", "error");
+            request.setAttribute("message",
+                    String.format("De har ikke nok penge på Deres konto. Kontakt Olskers Cupcakes for hjælp."));
+        }
+
+ */
+        if (newBalance>0){
             UserMapper.updateBalance(newBalance, user.getEmail());
             user.setBalance(newBalance);
             session.setAttribute("balance", newBalance);
@@ -38,8 +46,8 @@ public class Kurv extends Command {
             int userID = user.getUserID();
             LocalDate date = LocalDate.now();
 
-            int quantity = Bestilling.orderItem.getQuantity();
-            double sum = OrderItem.orderlinePriceCalculator();
+            int quantity = Bestilling.orderItem.getAntal();
+            double sum = Bestilling.orderItem.getOrderPrice();
 
             Order order = new Order(email, userID, date);
             OrderMapper.insertOrder(order);
@@ -51,16 +59,23 @@ public class Kurv extends Command {
                 String botName = (String) session.getAttribute("bottomName");
                 double botPrice = (double) session.getAttribute("botPrice");
 
-            OrderDetails orderDetails = new OrderDetails(order.getOrderID(), date, email, topID,
-                    topName, topPrice, botID, botName, botPrice, quantity, sum);
-            OrderMapper.insertOrderDetails(orderDetails);
+
+                OrderDetails orderDetails = new OrderDetails(order.getOrderID(), date, email, topID,
+                        topName, topPrice, botID, botName, botPrice, quantity, sum);
+
+                OrderMapper.insertOrderDetails(kurv.getOrderlist(), user, orderDetails);
+
+
 
             // Tømmer kurven:
             kurv.emptyKurv();
 
         } else {
-            request.setAttribute("balanceMessage", "Du har ikke nok penge til at gennemføre købet.");
+            request.setAttribute("status", "error");
+            request.setAttribute("message",
+                    String.format("De har ikke nok penge på Deres konto. Kontakt Olskers Cupcakes for hjælp."));
         }
+
         return "kurv";
     }
 

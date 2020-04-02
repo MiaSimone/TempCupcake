@@ -25,6 +25,10 @@ public class Orderlist {
         this.quantity = 0;
     }
 
+    public void fjernOrdre(OrderItem orderItem) {
+        orderlist.remove(orderItem);
+    }
+
     /**
      * @author Rasmus
      * @return metoden returnerer den totale pris for hele ordren, alle cupcakesne
@@ -32,7 +36,7 @@ public class Orderlist {
     public double getTotalSum() {
         double sum = 0.0;
         for (OrderItem orderItem : orderlist) {
-            sum += orderItem.getOrderlinePrice();
+            sum += orderItem.getOrderPrice();
         }
         return sum;
     }
@@ -42,15 +46,4 @@ public class Orderlist {
         return orderlist;
     }
 
-    public void setOrderlist(ArrayList<OrderItem> orderlist) {
-        this.orderlist = orderlist;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }

@@ -1,12 +1,16 @@
 package FunctionLayer;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class OrderDetails {
 
     private int id;
     private int orderID;
-    private LocalDate date;
+
+    private LocalDate localDate;
+    private Date date;
+
     private String email;
     private int toppingID;
     private String toppingName;
@@ -16,11 +20,26 @@ public class OrderDetails {
     private double bottomPrice;
     private int quantity;
     private double sum;
-
-    public OrderDetails(int orderID, LocalDate date, String email, int toppingID, String toppingName,
+// date date
+    public OrderDetails(int orderID, Date date, String email, int toppingID, String toppingName,
                         double toppingPrice, int bottomID, String bottomName, double bottomPrice, int quantity, double sum) {
         this.orderID = orderID;
         this.date = date;
+        this.email = email;
+        this.toppingID = toppingID;
+        this.toppingName = toppingName;
+        this.toppingPrice = toppingPrice;
+        this.bottomID = bottomID;
+        this.bottomName = bottomName;
+        this.bottomPrice = bottomPrice;
+        this.quantity = quantity;
+        this.sum = sum;
+    }
+// Localdate
+    public OrderDetails(int orderID, LocalDate localDate, String email, int toppingID, String toppingName,
+                        double toppingPrice, int bottomID, String bottomName, double bottomPrice, int quantity, double sum) {
+        this.orderID = orderID;
+        this.localDate = localDate;
         this.email = email;
         this.toppingID = toppingID;
         this.toppingName = toppingName;
@@ -46,14 +65,6 @@ public class OrderDetails {
 
     public void setOrderID(int orderID) {
         this.orderID = orderID;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 
     public String getEmail() {
@@ -126,5 +137,22 @@ public class OrderDetails {
 
     public void setSum(double sum) {
         this.sum = sum;
+    }
+
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

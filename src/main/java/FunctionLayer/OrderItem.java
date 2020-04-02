@@ -1,24 +1,37 @@
 package FunctionLayer;
 
-public class OrderItem {
+public class OrderItem{
 
-    private static Topping topping;
-    private static Bottom bottom;
-    private static double orderlinePrice;
 
-    private static int quantity;
+    /**
+     * @author Mia
+     */
 
-    public static double orderlinePriceCalculator() {
-        orderlinePrice = (topping.getToppingPrice() + bottom.getBottomPrice())*quantity;
-        return orderlinePrice;
+    private int orderID ;
+    private Topping topping;
+    private Bottom bottom;
+    private int antal;
+    private double cupcakePrice;
+
+    private double orderPrice;
+
+    public double getCupcakePrice(){
+        cupcakePrice = (topping.getToppingPrice() + bottom.getBottomPrice());
+        return cupcakePrice;
     }
 
-    public OrderItem(Topping topping, Bottom bottom, int quantity) {
+    public double getOrderPrice() {
+        orderPrice = cupcakePrice*antal;
+        return orderPrice;
+    }
+
+    public OrderItem(Topping topping, Bottom bottom, int antal) {
         this.topping = topping;
         this.bottom = bottom;
-        this.quantity = quantity;
-        orderlinePriceCalculator();
+        this.antal = antal;
+        getOrderPrice();
     }
+
 
     public Topping getTopping() {
         return topping;
@@ -36,19 +49,16 @@ public class OrderItem {
         this.bottom = bottom;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getAntal() {
+        return antal;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public int getOrderID() {
+        return orderID;
     }
 
-    public double getOrderlinePrice() {
-        return orderlinePrice;
-    }
-
-    public void setOrderlinePrice(double orderlinePrice) {
-        this.orderlinePrice = orderlinePrice;
+    @Override
+    public String toString() {
+        return bottom.getName() + " bund med " + topping.getName() + " topping. " + antal + " stk.";
     }
 }

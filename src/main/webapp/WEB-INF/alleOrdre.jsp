@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="UtilClass.Initializer" %>
-<%@ page import="FunctionLayer.LoginSampleException" %><%--
+<%@ page import="FunctionLayer.LoginSampleException" %>
+<%@ page import="DBAccess.UserMapper" %>
+<%@ page import="DBAccess.OrderMapper" %><%--
   Created by IntelliJ IDEA.
   User: miade
   Date: 20-03-2020
@@ -23,11 +25,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+    <style>
+        .div {
+            background-color: floralwhite;
+            width: 300px;
+            height: auto;
+            padding: 50px;
+        }
+    </style>
 
-    <title>Employee</title>
+
+    <title>Alle Ordre</title>
 
 </head>
 <body style="background: rgb(184,36,62) linear-gradient(0deg, rgba(184,36,62,1) 0%, rgba(224,202,174,1) 44%)">
+
+<%
+    try {
+        request.setAttribute("orders", OrderMapper.getOrders());
+    } catch (LoginSampleException e) {
+        e.printStackTrace();
+    }
+%>
 
 <!-- Start Picture -->
 <img src="./Images/LoginBackground.png" alt="Logo" width="100%" height=auto>
@@ -54,7 +73,7 @@
             </li>
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="FrontController?target=redirect&destination=alleOrdre"> Alle ordre </a>
             </li>
         </ul>
@@ -67,50 +86,24 @@
 </nav>
 <!-- End og navigation -->
 
-<!-- Page content -->
-<div class="container mt-4">
 
-    <div class="row">
-        <div class="col-md-6 text-center">
-            <h6>Indsæt beløb på kundekonto:</h6>
-            <form name="insertAmount" action="FrontController" method="POST" >
-                <input type="hidden" name="target" value="insertAmount">
+<div class="container">
+    <h1 class="text-center mt-4 mb-4">Alle ordre:</h1>
 
-                <div class="form-group text-left">
-                    <label for="email">Indtast email:</label>
-                    <input type="text" name="email" class="form-control" id="email" placeholder="Email">
-                </div>
-                <div class="form-group text-left">
-                    <label for="amount">Indtast beløbet der skal indsættes:</label>
-                    <input type="number" name="amount" class="form-control" id="amount" placeholder="Beløb">
-                </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-dark mt-3">Indsæt beløb</button>
-                </div>
-            </form>
+    <div class="row mt-2">
+        <div class="div col-md-12 text-center">
+            <c:forEach var="order" items="${requestScope.orders}">
+                Ordre${order.orderID}: Lavet af ${order.email} (ID: ${order.userID}) - Dato: ${order.getDate}
+                <br>
+            </c:forEach>
         </div>
-
-        <div class="col-md-6 text-center mt-5">
-            <br>
-            <h6>Slet ordre:</h6>
-            <form name="sletOrdre" action="FrontController" method="POST" >
-                <input type="hidden" name="target" value="sletOrdre">
-                <div class="input-group mb-3">
-                    <input type="number" class="form-control" name="orderID" placeholder="OrderID" aria-label="OrderID" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-dark" type="submit">Delete</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
     </div>
-    <!-- /.row -->
 
-    <div class="text-center mt-3">
+
+    <div class="text-center mt-4">
         <a class="btn btn-outline-dark"
-           href="FrontController?target=redirect&destination=index" role="button">Log ud</a>
+           href="FrontController?target=redirect&destination=employeepage" role="button">Gå til oversigt</a>
     </div>
 
 </div>

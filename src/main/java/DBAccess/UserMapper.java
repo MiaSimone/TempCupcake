@@ -21,11 +21,13 @@ public class UserMapper {
     public static void createUser(User user) throws LoginSampleException {
         try {
             Connector con = new Connector();
-            String SQL = "INSERT INTO users (email, password, role) VALUES (?, ?, ?)";
+            String SQL = "INSERT INTO users (name, email, password, role, balance) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = con.getConnector().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getRole());
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getRole());
+            ps.setDouble(5, user.getBalance());
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -35,7 +37,6 @@ public class UserMapper {
             throw new LoginSampleException(ex.getMessage());
         }
     }
-
 
 // Login
     public static User login(String email, String password) throws LoginSampleException {
@@ -56,7 +57,7 @@ public class UserMapper {
                 user.setUserID(id);
                 return user;
             } else {
-                throw new LoginSampleException("Could not validate user");
+                throw new LoginSampleException("Kunne ikke finde brugeren.");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
@@ -94,7 +95,7 @@ public class UserMapper {
                 double balance = rs.getDouble("Balance");
                 return balance;
             } else {
-                throw new LoginSampleException("Could not validate user");
+                throw new LoginSampleException("Kunne ikke finde brugeren.");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());

@@ -1,25 +1,28 @@
 package PresentationLayer;
 
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.OrderDetails;
-import FunctionLayer.OrderItem;
-import FunctionLayer.Orderlist;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 public class FjernOrdreFraKurv extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response)  {
+
         HttpSession session = request.getSession();
-        Orderlist kurv = (Orderlist) session.getAttribute("kurv");
 
-        OrderItem orderItem = Bestilling.orderItem;
+        Orderlist orderlist = (Orderlist) session.getAttribute("kurv");
 
-        kurv.fjernOrdre(orderItem);
+        ArrayList<OrderItem> kurv = orderlist.getOrderlist();
+
+        int cartIndexToRemove = Integer.parseInt(request.getParameter("removeorderline"));
+        kurv.remove(cartIndexToRemove);
+        session.setAttribute("kurv", orderlist);
 
         return "kurv";
     }
+
 }

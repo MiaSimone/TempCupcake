@@ -31,7 +31,7 @@ public class OrderMapper {
         }
     }
 
-    public static void insertOrderDetails(ArrayList<OrderItem> kurv, User user, OrderDetails orderDetails) {
+    public static void insertOrderDetails(ArrayList<OrderItem> kurv, User user, OrderDetails orderDetails, Order order) {
 
         long millis=System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
@@ -43,7 +43,7 @@ public class OrderMapper {
             PreparedStatement ps = null;
             for (OrderItem orderItem: kurv) {
                 ps = con.getConnector().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-                ps.setInt(1, orderDetails.getOrderID());
+                ps.setInt(1, order.getOrderID());
                 ps.setDate(2, date);
                 ps.setString(3, user.getEmail());
                 ps.setInt(4, orderItem.getTopping().getId());

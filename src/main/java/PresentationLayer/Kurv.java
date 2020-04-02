@@ -63,7 +63,7 @@ public class Kurv extends Command {
                 OrderDetails orderDetails = new OrderDetails(order.getOrderID(), date, email, topID,
                         topName, topPrice, botID, botName, botPrice, quantity, sum);
 
-                OrderMapper.insertOrderDetails(kurv.getOrderlist(), user, orderDetails);
+                OrderMapper.insertOrderDetails(kurv.getOrderlist(), user, orderDetails, order);
 
 
 

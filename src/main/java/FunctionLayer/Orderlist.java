@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Orderlist {
 
-    ArrayList<OrderItem> orderlist = new ArrayList<>();
+    public static ArrayList<OrderItem> orderlist = new ArrayList<>();
     private int quantity = 0;
 
     public Orderlist() {
@@ -23,10 +23,6 @@ public class Orderlist {
     public void emptyKurv() {
         orderlist.clear();
         this.quantity = 0;
-    }
-
-    public void fjernOrdre(OrderItem orderItem) {
-        orderlist.remove(orderItem);
     }
 
     /**

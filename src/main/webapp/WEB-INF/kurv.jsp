@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="UtilClass.Initializer" %>
+<%@ page import="FunctionLayer.OrderItem" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="FunctionLayer.Bottom" %>
+<%@ page import="FunctionLayer.Orderlist" %>
 <%--
   Created by IntelliJ IDEA.
   User: miade
@@ -106,6 +110,8 @@
                         <i class="fa fa-shopping-cart"></i>
                     </span>
     </h4>
+    <form action="FrontController" method="post">
+        <input type="hidden" name="target" value="fjernOrdre">
 
         <table class="table table-striped ">
             <thead>
@@ -119,24 +125,29 @@
             </tr>
             </thead>
             <tbody>
-                <c:forEach var="orderItem" items="${sessionScope.kurv.orderlist}">
-                    <tr>
-                        <td>${orderItem.bottom.name}</td>
-                        <td>${orderItem.topping.name}</td>
-                        <td>${orderItem.antal}</td>
-                        <td>${orderItem.cupcakePrice}</td>
-                        <td>${orderItem.orderPrice}</td>
-                        <td>
-                            <form action="FrontController" method="post">
-                                <input type="hidden" name="target" value="fjernOrdre">
-                                <button type="submit" value="${requestScope.orderItem}"
-                                        class="btn btn-danger btn-xs">
-                                    Fjern
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                </c:forEach>
+
+
+            <%
+                int id = 0;
+            %>
+
+            <c:forEach var="orderItem" items="${sessionScope.kurv.orderlist}">
+                <tr>
+                    <td>${orderItem.bottom.name}</td>
+                    <td>${orderItem.topping.name}</td>
+                    <td>${orderItem.antal}</td>
+                    <td>${orderItem.cupcakePrice}</td>
+                    <td>${orderItem.orderPrice}</td>
+                    <td>
+
+                    <button type="submit" name="removeorderline" value="<%=id%>" class="btn btn-danger btn-xs">Fjern</button>
+
+                    </td>
+                </tr>
+                <%
+                    id++;
+                %>
+            </c:forEach>
 
             <tr>
                 <td colspan="4">I alt</td>
@@ -145,7 +156,7 @@
             </tr>
             </tbody>
         </table>
-
+    </form>
     <form action="FrontController" method="post">
         <input type="hidden" name="target" value="kurv">
 

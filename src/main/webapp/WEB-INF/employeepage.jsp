@@ -67,8 +67,22 @@
 </nav>
 <!-- End og navigation -->
 
+<%  String besked = (String) request.getAttribute("message");
+    String status = (String) request.getAttribute("status");
+    if (besked != null && status != null) {
+        String alert = "";
+        if (status.equals("ok")) {
+            alert = "<div class=\"alert alert-success\">_message_</div>";
+        } else {
+            alert = "<div class=\"alert alert-danger\">_message_</div>";
+        }
+        alert = alert.replace("_message_", besked);
+        out.println(alert);
+    }
+%>
+
 <!-- Page content -->
-<div class="container mt-4">
+<div class="container mt-5">
 
     <div class="row">
         <div class="col-md-6 text-center">

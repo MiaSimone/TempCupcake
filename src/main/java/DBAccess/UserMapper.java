@@ -1,5 +1,6 @@
 package DBAccess;
 
+import FunctionLayer.InsertAmountException;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Topping;
 import FunctionLayer.User;
@@ -83,7 +84,7 @@ public class UserMapper {
         }
     }
 
-    public static double findUser(String email) throws LoginSampleException {
+    public static double findUser(String email) throws InsertAmountException {
         try {
             Connector con = new Connector();
             String SQL = "SELECT Balance FROM users "
@@ -95,10 +96,10 @@ public class UserMapper {
                 double balance = rs.getDouble("Balance");
                 return balance;
             } else {
-                throw new LoginSampleException("Kunne ikke finde brugeren.");
+                throw new InsertAmountException("Brugeren findes ikke.");
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new InsertAmountException(ex.getMessage());
         }
     }
 

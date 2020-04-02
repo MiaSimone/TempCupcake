@@ -94,7 +94,7 @@
 
     <div class="row">
 
-        <div class="col-lg-6 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <a href="FrontController?target=redirect&destination=bestilling"><img class="card-img-top" src="./Images/bestil.jpg" alt=""></a>
                 <div class="card-body">
@@ -107,7 +107,20 @@
             </div>
         </div>
 
-        <div class="col-lg-6 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="./Images/ingrediens.jpg" alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#" style="text-decoration: none">Vores Ingredienser</a>
+                    </h4>
+                    <p class="card-text">Hvis De er interesseret i at vide mere om vores økologiske ingredienser,
+                        kan de klikke her.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <a href="FrontController?target=redirect&destination=infosite"><img class="card-img-top" src="./Images/Bornholm.jpg" alt=""></a>
                 <div class="card-body">

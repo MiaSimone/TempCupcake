@@ -46,7 +46,7 @@
 
     <div class="row mt-2">
         <div class="div col-md-12 text-center">
-            Information
+            Ingredienser
         </div>
     </div>
 

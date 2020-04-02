@@ -147,25 +147,25 @@ public class OrderMapper {
         return listOfOrderDetails;
     }
 
-
-    public static void deleteOrder(int orderID) {
+    public static boolean recordAdded;
+    public static void deleteOrder(int orderID) throws SletOrdreException{
         Connector myConnector = new Connector();
-
         try {
             myConnector.getConnector();
             String sql = "delete from orders where OrderID =?";
-            System.out.println("SQL:" + sql);
             PreparedStatement ps = myConnector.getConnector().prepareStatement(sql);
             ps.setInt(1, orderID);
-            ps.executeUpdate();
-            ps.close();
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            //ps.executeUpdate();
+            //ResultSet rs=ps.executeQuery();
+            recordAdded = false;
+            if(ps.executeUpdate() != 0){
+                recordAdded = true;
+            } else {
+                throw new SletOrdreException("Ordren med OrdreID'et " + orderID + " findes ikke.");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new SletOrdreException(ex.getMessage());
         }
-
     }
 
     public static void deleteOrderDetails(int orderID) {

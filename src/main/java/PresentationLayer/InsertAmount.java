@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class InsertAmount extends Command {
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws InsertAmountException {
 
         HttpSession session = request.getSession();
 
@@ -28,8 +28,17 @@ public class InsertAmount extends Command {
 
         double newBalance = balance+amount;
 
-        UserMapper.updateBalance(newBalance, email);
-        session.setAttribute("balance", newBalance);
+        if (UserMapper.findUser(email) != 0){
+            UserMapper.updateBalance(newBalance, email);
+            session.setAttribute("balance", newBalance);
+
+            request.setAttribute("status", "ok");
+            request.setAttribute("message", "Pengene er nu sat ind på kundens konto.");
+        }
+        if (amount<=0){
+            request.setAttribute("status", "error");
+            request.setAttribute("message", "Beløbet må ikke være negativt.");
+        }
 
         return "employeepage";
     }

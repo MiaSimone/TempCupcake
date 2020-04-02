@@ -61,7 +61,7 @@ CREATE TABLE `orderdetails` (
   `Quantity` int(255) NOT NULL,
   `Sum` double(100,2) NOT NULL,
   PRIMARY KEY (`orderdetailID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `orderdetails` (
 
 LOCK TABLES `orderdetails` WRITE;
 /*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
-INSERT INTO `orderdetails` VALUES (3,2,'2020-04-02','robin@somewhere.com',3,'Raspberry',5.00,3,'Nutmeg',5.00,3,30.00),(5,4,'2020-04-02','andreas.noer@hotmail.dk',9,'Blue cheese',9.00,5,'Almond',7.00,10,160.00),(6,0,'2020-04-02','andreas.noer@hotmail.dk',9,'Blue cheese',9.00,5,'Almond',7.00,10,160.00),(7,0,'2020-04-02','andreas.noer@hotmail.dk',9,'Blue cheese',9.00,5,'Almond',7.00,10,160.00),(8,5,'2020-04-02','LM@hell.com',5,'Strawberry',6.00,3,'Nutmeg',5.00,6,66.00),(9,0,'2020-04-02','LM@hell.com',5,'Strawberry',6.00,3,'Nutmeg',5.00,10,110.00);
+INSERT INTO `orderdetails` VALUES (5,5,'2020-04-02','rasmush22@live.dk',4,'Crispy',6.00,3,'Nutmeg',5.00,7,77.00);
 /*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +96,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (2,'robin@somewhere.com',2,'2020-04-01'),(4,'andreas.noer@hotmail.dk',1,'2020-04-01'),(5,'LM@hell.com',5,'2020-04-01');
+INSERT INTO `orders` VALUES (5,'rasmush22@live.dk',6,'2020-04-01');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (0,'Mia de Fries','miadefries@gmail.com','bertil3','employee',500.00),(1,'Andreas Noer','andreas.noer@hotmail.dk','ally','customer',100140.00),(2,'Robin Robinson','robin@somewhere.com','batman','customer',470.00),(3,'Jens Jensen','jens.jensen@gmail.com','missekat','customer',500.00),(4,'Lars Larsen','lars.jysk@gmail.com','jyskmand','customer',476.00),(5,'Lucifer Morningstar','LM@hell.com','pain','customer',324.00),(6,'Sanne Salamonsen','SSa@gmail.com','fisk','customer',500.00);
+INSERT INTO `users` VALUES (0,'Mia de Fries','miadefries@gmail.com','bertil3','employee',0.00),(1,'Andreas Noer','andreas.noer@hotmail.dk','ally','customer',462.00),(2,'Robin Robinson','robin@somewhere.com','batman','customer',500.00),(3,'Jens Jensen','jens.jensen@gmail.com','missekat','customer',500.00),(4,'Lars Larsen','lars.jysk@gmail.com','jyskmand','customer',476.00),(5,'Lucifer Morningstar','LM@hell.com','pain','customer',452.00),(6,'Rasmus Hansen','rasmush22@live.dk','1234','customer',423.00);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -163,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-02 15:05:57
+-- Dump completed on 2020-04-02 20:49:20
